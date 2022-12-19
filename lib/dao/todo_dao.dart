@@ -1,6 +1,6 @@
 import 'dart:async';
-import 'package:reactive_todo_app/database/database.dart';
-import 'package:reactive_todo_app/model/todo.dart';
+import '../database/database.dart';
+import '../model/todo.dart';
 
 class TodoDao {
   final dbProvider = DatabaseProvider.dbProvider;
@@ -14,16 +14,19 @@ class TodoDao {
 
   //Get All Todo items
   //Searches if query string was passed
-  Future<List<Todo>> getTodos({List<String> columns, String query}) async {
+  Future<List<Todo>> getTodos({List<String>? columns, String? query}) async {
     final db = await dbProvider.database;
 
     List<Map<String, dynamic>> result;
     if (query != null) {
-      if (query.isNotEmpty)
+      if (query.isNotEmpty) {
         result = await db.query(todoTABLE,
             columns: columns,
             where: 'description LIKE ?',
             whereArgs: ["%$query%"]);
+      } else {
+        result = List.empty();
+      }
     } else {
       result = await db.query(todoTABLE, columns: columns);
     }
