@@ -8,12 +8,6 @@ class TodoDao {
   //Adds new Todo records
   Future<int> createTodo(Todo todo) async {
     final db = await dbProvider.database;
-    // var result;
-    // if (db != null) {
-    //   result = db.insert(todoTABLE, todo.toDatabaseJson());
-    // } else {
-    //   result = null;
-    // }
     var result = db!.insert(todoTABLE, todo.toDatabaseJson());
 
     return result;
@@ -35,9 +29,7 @@ class TodoDao {
         result = List.empty();
       }
     } else {
-      // result = await db.query(todoTABLE, columns: columns);
-      List<Map<String, Object?>> foo = List.empty();
-      result = foo;
+      result = await db!.query(todoTABLE, columns: columns);
     }
 
     List<Todo> todos = result.isNotEmpty
