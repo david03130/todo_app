@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:reactive_todo_app/bloc/todo_bloc.dart';
-import 'package:reactive_todo_app/model/todo.dart';
+import '../bloc/todo_bloc.dart';
+import '../model/todo.dart';
 
 class HomePage extends StatelessWidget {
-  HomePage({Key key, this.title}) : super(key: key);
+  HomePage({/*required Key key,*/ required this.title})/* : super(key: key)*/;
 
   //We load our Todo BLoC that is used to get
   //the stream of Todo for StreamBuilder
@@ -34,7 +34,7 @@ class HomePage extends StatelessWidget {
         bottomNavigationBar: BottomAppBar(
           color: Colors.white,
           child: Container(
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
                 border: Border(
               top: BorderSide(color: Colors.grey, width: 0.3),
             )),
@@ -42,7 +42,7 @@ class HomePage extends StatelessWidget {
               mainAxisSize: MainAxisSize.max,
               children: <Widget>[
                 IconButton(
-                    icon: Icon(
+                    icon: const Icon(
                       Icons.menu,
                       color: Colors.indigoAccent,
                       size: 28,
@@ -51,7 +51,7 @@ class HomePage extends StatelessWidget {
                       //just re-pull UI for testing purposes
                       todoBloc.getTodos();
                     }),
-                Expanded(
+                const Expanded(
                   child: Text(
                     "Todo",
                     style: TextStyle(
@@ -64,7 +64,7 @@ class HomePage extends StatelessWidget {
                 ),
                 Wrap(children: <Widget>[
                   IconButton(
-                    icon: Icon(
+                    icon: const Icon(
                       Icons.search,
                       size: 28,
                       color: Colors.indigoAccent,
@@ -73,7 +73,7 @@ class HomePage extends StatelessWidget {
                       _showTodoSearchSheet(context);
                     },
                   ),
-                  Padding(
+                  const Padding(
                     padding: EdgeInsets.only(right: 5),
                   )
                 ])
@@ -83,14 +83,14 @@ class HomePage extends StatelessWidget {
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         floatingActionButton: Padding(
-          padding: EdgeInsets.only(bottom: 25),
+          padding: const EdgeInsets.only(bottom: 25),
           child: FloatingActionButton(
             elevation: 5.0,
             onPressed: () {
               _showAddTodoSheet(context);
             },
             backgroundColor: Colors.white,
-            child: Icon(
+            child: const Icon(
               Icons.add,
               size: 32,
               color: Colors.indigoAccent,
@@ -104,20 +104,20 @@ class HomePage extends StatelessWidget {
     showModalBottomSheet(
         context: context,
         builder: (builder) {
-          return new Padding(
+          return Padding(
             padding: EdgeInsets.only(
                 bottom: MediaQuery.of(context).viewInsets.bottom),
-            child: new Container(
+            child: Container(
               color: Colors.transparent,
-              child: new Container(
+              child: Container(
                 height: 230,
-                decoration: new BoxDecoration(
+                decoration: const BoxDecoration(
                     color: Colors.white,
-                    borderRadius: new BorderRadius.only(
-                        topLeft: const Radius.circular(10.0),
-                        topRight: const Radius.circular(10.0))),
+                    borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(10.0),
+                        topRight: Radius.circular(10.0))),
                 child: Padding(
-                  padding: EdgeInsets.only(
+                  padding: const EdgeInsets.only(
                       left: 15, top: 25.0, right: 15, bottom: 30),
                   child: ListView(
                     children: <Widget>[
@@ -130,7 +130,7 @@ class HomePage extends StatelessWidget {
                               controller: _todoDescriptionFormController,
                               textInputAction: TextInputAction.newline,
                               maxLines: 4,
-                              style: TextStyle(
+                              style: const TextStyle(
                                   fontSize: 21, fontWeight: FontWeight.w400),
                               autofocus: true,
                               decoration: const InputDecoration(
@@ -139,8 +139,8 @@ class HomePage extends StatelessWidget {
                                   labelStyle: TextStyle(
                                       color: Colors.indigoAccent,
                                       fontWeight: FontWeight.w500)),
-                              validator: (String value) {
-                                if (value.isEmpty) {
+                              validator: (String? value) {
+                                if (value == null) {
                                   return 'Empty description!';
                                 }
                                 return value.contains('')
@@ -150,18 +150,19 @@ class HomePage extends StatelessWidget {
                             ),
                           ),
                           Padding(
-                            padding: EdgeInsets.only(left: 5, top: 15),
+                            padding: const EdgeInsets.only(left: 5, top: 15),
                             child: CircleAvatar(
                               backgroundColor: Colors.indigoAccent,
                               radius: 18,
                               child: IconButton(
-                                icon: Icon(
+                                icon: const Icon(
                                   Icons.save,
                                   size: 22,
                                   color: Colors.white,
                                 ),
                                 onPressed: () {
                                   final newTodo = Todo(
+                                      id: 0,
                                       description:
                                           _todoDescriptionFormController
                                               .value.text);
@@ -196,20 +197,20 @@ class HomePage extends StatelessWidget {
     showModalBottomSheet(
         context: context,
         builder: (builder) {
-          return new Padding(
+          return Padding(
             padding: EdgeInsets.only(
                 bottom: MediaQuery.of(context).viewInsets.bottom),
-            child: new Container(
+            child: Container(
               color: Colors.transparent,
-              child: new Container(
+              child: Container(
                 height: 230,
-                decoration: new BoxDecoration(
+                decoration: const BoxDecoration(
                     color: Colors.white,
-                    borderRadius: new BorderRadius.only(
-                        topLeft: const Radius.circular(10.0),
-                        topRight: const Radius.circular(10.0))),
+                    borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(10.0),
+                        topRight: Radius.circular(10.0))),
                 child: Padding(
-                  padding: EdgeInsets.only(
+                  padding: const EdgeInsets.only(
                       left: 15, top: 25.0, right: 15, bottom: 30),
                   child: ListView(
                     children: <Widget>[
@@ -222,7 +223,7 @@ class HomePage extends StatelessWidget {
                               controller: _todoSearchDescriptionFormController,
                               textInputAction: TextInputAction.newline,
                               maxLines: 4,
-                              style: TextStyle(
+                              style: const TextStyle(
                                   fontSize: 18, fontWeight: FontWeight.w400),
                               autofocus: true,
                               decoration: const InputDecoration(
@@ -232,10 +233,14 @@ class HomePage extends StatelessWidget {
                                     color: Colors.indigoAccent,
                                     fontWeight: FontWeight.w500),
                               ),
-                              validator: (String value) {
-                                return value.contains('@')
-                                    ? 'Do not use the @ char.'
-                                    : null;
+                              validator: (String? value) {
+                                if (value != null) {
+                                  return value.contains('@')
+                                      ? 'Do not use the @ char.'
+                                      : null;
+                                } else {
+                                  return null;
+                                }
                               },
                             ),
                           ),
@@ -299,14 +304,15 @@ class HomePage extends StatelessWidget {
       but returned returned 0 records of Todo from DB.
       If that the case show user that you have empty Todos
       */
-      return snapshot.data.length != 0
+      return snapshot.data?.length != 0
           ? ListView.builder(
-              itemCount: snapshot.data.length,
+              itemCount: snapshot.data?.length,
               itemBuilder: (context, itemPosition) {
-                Todo todo = snapshot.data[itemPosition];
-                final Widget dismissibleCard = new Dismissible(
+                Todo todo = snapshot.data![itemPosition];
+                final Widget dismissibleCard = Dismissible(
                   background: Container(
-                    child: Padding(
+                    color: Colors.redAccent,
+                    child: const Padding(
                       padding: EdgeInsets.only(left: 10),
                       child: Align(
                         alignment: Alignment.centerLeft,
@@ -316,7 +322,6 @@ class HomePage extends StatelessWidget {
                         ),
                       ),
                     ),
-                    color: Colors.redAccent,
                   ),
                   onDismissed: (direction) {
                     /*The magic
@@ -326,10 +331,10 @@ class HomePage extends StatelessWidget {
                     todoBloc.deleteTodoById(todo.id);
                   },
                   direction: _dismissDirection,
-                  key: new ObjectKey(todo),
+                  key: ObjectKey(todo),
                   child: Card(
                       shape: RoundedRectangleBorder(
-                        side: BorderSide(color: Colors.grey[200], width: 0.5),
+                        side: const BorderSide(color: Colors.grey, width: 0.5),
                         borderRadius: BorderRadius.circular(5),
                       ),
                       color: Colors.white,
@@ -338,7 +343,7 @@ class HomePage extends StatelessWidget {
                           onTap: () {
                             //Reverse the value
                             todo.isDone = !todo.isDone;
-                          /*
+                            /*
                             Another magic.
                             This will update Todo isDone with either
                             completed or not
@@ -350,12 +355,12 @@ class HomePage extends StatelessWidget {
                             child: Padding(
                               padding: const EdgeInsets.all(15.0),
                               child: todo.isDone
-                                  ? Icon(
+                                  ? const Icon(
                                       Icons.done,
                                       size: 26.0,
                                       color: Colors.indigoAccent,
                                     )
-                                  : Icon(
+                                  : const Icon(
                                       Icons.check_box_outline_blank,
                                       size: 26.0,
                                       color: Colors.tealAccent,
@@ -403,7 +408,7 @@ class HomePage extends StatelessWidget {
       child: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
+          children: const <Widget>[
             CircularProgressIndicator(),
             Text("Loading...",
                 style: TextStyle(fontSize: 19, fontWeight: FontWeight.w500))
@@ -415,7 +420,7 @@ class HomePage extends StatelessWidget {
 
   Widget noTodoMessageWidget() {
     return Container(
-      child: Text(
+      child: const Text(
         "Start adding Todo...",
         style: TextStyle(fontSize: 19, fontWeight: FontWeight.w500),
       ),

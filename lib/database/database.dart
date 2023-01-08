@@ -1,15 +1,18 @@
 import 'dart:async';
 import 'dart:io';
+// import 'dart:js';
 
 // import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
+import 'package:todo_app/database/bbdd.dart';
 
 final todoTABLE = 'Todo';
+
 class DatabaseProvider {
   static final DatabaseProvider dbProvider = DatabaseProvider();
 
-  Database _database;
+  Database _database = BBDD();
 
   Future<Database> get database async {
     if (_database != null) return _database;
@@ -20,7 +23,7 @@ class DatabaseProvider {
   createDatabase() async {
     Directory documentsDirectory = await getApplicationDocumentsDirectory();
     //"ReactiveTodo.db is our database instance name
-    String path = join(documentsDirectory.path, "ReactiveTodo.db");
+    String path = "${documentsDirectory.path}ReactiveTodo.db";
 
     var database = await openDatabase(path,
         version: 1, onCreate: initDB, onUpgrade: onUpgrade);
