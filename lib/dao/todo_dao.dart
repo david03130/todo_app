@@ -28,7 +28,9 @@ class TodoDao {
         result = List.empty();
       }
     } else {
-      result = await db.query(todoTABLE, columns: columns);
+      // result = await db.query(todoTABLE, columns: columns);
+      List<Map<String, Object?>> foo = List.empty();
+      result = foo;
     }
 
     List<Todo> todos = result.isNotEmpty
