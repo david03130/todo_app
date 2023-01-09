@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../bloc/todo_bloc.dart';
 import '../model/todo.dart';
+import '../providers/todo_provider.dart';
 
 class HomePage extends StatelessWidget {
-  HomePage({/*required Key key,*/ required this.title})/* : super(key: key)*/;
+  HomePage({/*required Key key,*/ required this.title}) /* : super(key: key)*/;
 
   //We load our Todo BLoC that is used to get
   //the stream of Todo for StreamBuilder
@@ -63,6 +64,16 @@ class HomePage extends StatelessWidget {
                   ),
                 ),
                 Wrap(children: <Widget>[
+                  IconButton(
+                    icon: const Icon(
+                      Icons.api,
+                      size: 28,
+                      color: Colors.indigoAccent,
+                    ),
+                    onPressed: () {
+                      TodoApiProvider.getAllTodos();
+                    },
+                  ),
                   IconButton(
                     icon: const Icon(
                       Icons.search,
