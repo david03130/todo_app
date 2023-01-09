@@ -66,12 +66,24 @@ class HomePage extends StatelessWidget {
                 Wrap(children: <Widget>[
                   IconButton(
                     icon: const Icon(
+                      Icons.delete_forever,
+                      size: 28,
+                      color: Colors.indigoAccent,
+                    ),
+                    onPressed: () async {
+                      await TodoApiProvider.deleteAllTodos();
+                      todoBloc.getTodos();
+                    },
+                  ),
+                  IconButton(
+                    icon: const Icon(
                       Icons.api,
                       size: 28,
                       color: Colors.indigoAccent,
                     ),
-                    onPressed: () {
-                      TodoApiProvider.getAllTodos();
+                    onPressed: () async {
+                      await TodoApiProvider.getAllTodos();
+                      todoBloc.getTodos();
                     },
                   ),
                   IconButton(

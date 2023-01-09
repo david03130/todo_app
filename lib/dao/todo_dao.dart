@@ -10,7 +10,11 @@ class TodoDao {
     final db = await dbProvider.database;
     final todoList = await db!.query("Todo");
 
-    todo.id = int.parse(todoList.last.values.first!.toString()) + 1;
+    if (todoList.isNotEmpty) {
+      todo.id = int.parse(todoList.last.values.first!.toString()) + 1;
+    } else {
+      todo.id = 0;
+    }
 
     var result = db.insert(todoTABLE, todo.toDatabaseJson());
     // var result = db!.insert(todoTABLE, todo.toDatabaseJson());
