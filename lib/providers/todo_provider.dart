@@ -9,11 +9,11 @@ class TodoApiProvider {
     Response response = await Dio().get(url);
     final dbProvider = DatabaseProvider.dbProvider;
     final db = await dbProvider.database;
-    
+
     // final TodoBloc todoBloc = TodoBloc();
     // todoBloc.getTodos();
 
-    // deleteAllTodos();
+    await deleteAllTodos();
     return (response.data as List).map((todoItem) {
       // ignore: avoid_print
       print('Inserting $todoItem');
@@ -37,7 +37,17 @@ class TodoApiProvider {
     final dbProvider = DatabaseProvider.dbProvider;
     final db = await dbProvider.database;
     final res = await db?.rawDelete('DELETE FROM Todo');
+    // final res = await db?.delete("Todo");
 
     return res;
   }
+
+  // static Future<int?> deleteAllTodos2() async {
+  //   final dbProvider = DatabaseProvider.dbProvider;
+  //   final db = await dbProvider.database;
+  //   final res = await db?.execute("DELETE FROM Todo");
+  //   // final res = await db?.delete("Todo");
+
+  //   return res;
+  // }
 }
