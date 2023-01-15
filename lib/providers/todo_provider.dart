@@ -43,9 +43,17 @@ class TodoApiProvider {
     return response;
   }
 
+  static Future updateApiTodo(Todo todo) async {
+    var url = "https://63bc1a0cfa38d30d85bbadb2.mockapi.io/Todos";
+    int id = todo.id;
+    Response response = await Dio().put("$url/$id", data: todo.toJson());
+    return response;
+  }
+
   static Future deleteApiTodoById(int id) async {
     var url = "https://63bc1a0cfa38d30d85bbadb2.mockapi.io/Todos/";
     Response response = await Dio().delete("$url$id");
+    return response;
   }
 
   static Future<int?> deleteAllTodos() async {

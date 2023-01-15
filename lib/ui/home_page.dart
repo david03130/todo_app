@@ -71,17 +71,17 @@ class HomePage extends StatelessWidget {
                   ),
                 ),
                 Wrap(children: <Widget>[
-                  IconButton(
-                    icon: const Icon(
-                      Icons.delete_forever,
-                      size: 28,
-                      color: Colors.indigoAccent,
-                    ),
-                    onPressed: () async {
-                      await TodoApiProvider.deleteAllTodos();
-                      todoBloc.getTodos();
-                    },
-                  ),
+                  // IconButton(
+                  //   icon: const Icon(
+                  //     Icons.delete_forever,
+                  //     size: 28,
+                  //     color: Colors.indigoAccent,
+                  //   ),
+                  //   onPressed: () async {
+                  //     await TodoApiProvider.deleteAllTodos();
+                  //     todoBloc.getTodos();
+                  //   },
+                  // ),
                   IconButton(
                     icon: const Icon(
                       Icons.api,
@@ -383,6 +383,9 @@ class HomePage extends StatelessWidget {
                             completed or not
                           */
                             todoBloc.updateTodo(todo);
+                            () async {
+                              await TodoApiProvider.updateApiTodo(todo);
+                            }();
                           },
                           child: Container(
                             //decoration: BoxDecoration(),
