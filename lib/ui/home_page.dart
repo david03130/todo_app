@@ -10,6 +10,7 @@ class HomePage extends StatelessWidget {
   //We load our Todo BLoC that is used to get
   //the stream of Todo for StreamBuilder
   final TodoBloc todoBloc = TodoBloc();
+
   final String title;
 
   //Allows Todo card to be dismissable horizontally
@@ -17,6 +18,11 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    () async {
+      await TodoApiProvider.getAllTodos();
+    }();
+    todoBloc.getTodos();
+
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark.copyWith(
         statusBarColor: Colors.white,
         systemNavigationBarColor: Colors.white,
