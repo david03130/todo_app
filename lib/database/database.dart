@@ -6,7 +6,7 @@ import 'dart:io';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
 
-final todoTABLE = 'Todo';
+const todoTABLE = 'Todo';
 
 class DatabaseProvider {
   static final DatabaseProvider dbProvider = DatabaseProvider();

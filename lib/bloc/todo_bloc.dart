@@ -1,6 +1,7 @@
+import 'package:todo_app/providers/todo_provider.dart';
+
 import '../model/todo.dart';
 import '../repository/todo_repository.dart';
-
 
 import 'dart:async';
 
@@ -24,6 +25,15 @@ class TodoBloc {
     //sink is a way of adding data reactively to the stream
     //by registering a new event
     _todoController.sink.add(await _todoRepository.getAllTodos(query: query));
+
+    // TODO: No coge los elementos de la API cuando se llama desde aquí.
+    // final todos = await TodoApiProvider.getAllTodos();
+    // List<Todo> todosFinal = List.empty();
+
+    // for (var todoItem in todos) {
+    //   todosFinal.add(todoItem!);
+    // }
+    // _todoController.sink.add(todosFinal);
   }
 
   addTodo(Todo todo) async {

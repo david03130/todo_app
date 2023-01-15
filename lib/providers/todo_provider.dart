@@ -15,9 +15,6 @@ class TodoApiProvider {
 
     await deleteAllTodos();
     return (response.data as List).map((todoItem) {
-      // ignore: avoid_print
-      print('Inserting $todoItem');
-
       Todo todo = Todo(id: 0, description: "");
       for (var propertyItem in todoItem.entries) {
         if (propertyItem.key == "id") {
@@ -41,13 +38,4 @@ class TodoApiProvider {
 
     return res;
   }
-
-  // static Future<int?> deleteAllTodos2() async {
-  //   final dbProvider = DatabaseProvider.dbProvider;
-  //   final db = await dbProvider.database;
-  //   final res = await db?.execute("DELETE FROM Todo");
-  //   // final res = await db?.delete("Todo");
-
-  //   return res;
-  // }
 }
