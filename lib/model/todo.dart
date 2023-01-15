@@ -32,4 +32,13 @@ class Todo {
         "description": this.description,
         "is_done": this.isDone == false ? 0 : 1,
       };
+
+  Map<String, dynamic> toJson() => {
+        //A method will be used to convert Todo objects that
+        //are to be stored into the datbase in a form of JSON
+
+        "id": this.id,
+        "description": this.description,
+        "isDone": this.isDone,
+      };
 }

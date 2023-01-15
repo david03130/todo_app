@@ -20,7 +20,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     // Coge los Todo's más recientes de la API.
     () async {
-      await TodoApiProvider.getAllTodos();
+      await TodoApiProvider.getAllApiTodos();
     }();
     todoBloc.getTodos();
 
@@ -89,7 +89,7 @@ class HomePage extends StatelessWidget {
                       color: Colors.indigoAccent,
                     ),
                     onPressed: () async {
-                      await TodoApiProvider.getAllTodos();
+                      await TodoApiProvider.getAllApiTodos();
                       todoBloc.getTodos();
                     },
                   ),
@@ -203,6 +203,9 @@ class HomePage extends StatelessWidget {
                                     Todo
                                     */
                                     todoBloc.addTodo(newTodo);
+                                    () async {
+                                      await TodoApiProvider.postTodo(newTodo);
+                                    }();
 
                                     //dismisses the bottomsheet
                                     Navigator.pop(context);

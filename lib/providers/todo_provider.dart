@@ -8,16 +8,13 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class TodoApiProvider {
-  static Future<List<Todo?>> getAllTodos() async {
-    var url = "https://63bc1a0cfa38d30d85bbadb2.mockapi.io/Todos";
-    Response response = await Dio().get(url);
+  static Future<List<Todo?>> getAllApiTodos() async {
     final dbProvider = DatabaseProvider.dbProvider;
     final db = await dbProvider.database;
 
-    // final TodoBloc todoBloc = TodoBloc();
-    // todoBloc.getTodos();
-
+    Response response = await getApiTodos();
     await deleteAllTodos();
+
     return (response.data as List).map((todoItem) {
       Todo todo = Todo(id: 0, description: "");
       for (var propertyItem in todoItem.entries) {
@@ -34,6 +31,18 @@ class TodoApiProvider {
     }).toList();
   }
 
+  static Future<Response> getApiTodos() async {
+    var url = "https://63bc1a0cfa38d30d85bbadb2.mockapi.io/Todos";
+    Response response = await Dio().get(url);
+    return response;
+  }
+
+  static Future postTodo(Todo todo) async {
+    var url = "https://63bc1a0cfa38d30d85bbadb2.mockapi.io/Todos";
+    Response response = await Dio().post(url, data: todo.toJson());
+    return response;
+  }
+
   static Future deleteApiTodoById(int id) async {
     var url = "https://63bc1a0cfa38d30d85bbadb2.mockapi.io/Todos/";
     Response response = await Dio().delete("$url$id");
@@ -43,7 +52,6 @@ class TodoApiProvider {
     final dbProvider = DatabaseProvider.dbProvider;
     final db = await dbProvider.database;
     final res = await db?.rawDelete('DELETE FROM Todo');
-    // final res = await db?.delete("Todo");
 
     return res;
   }
