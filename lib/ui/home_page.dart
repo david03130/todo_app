@@ -18,6 +18,7 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Coge los Todo's más recientes de la API.
     () async {
       await TodoApiProvider.getAllTodos();
     }();
@@ -352,12 +353,13 @@ class HomePage extends StatelessWidget {
                       ),
                     ),
                   ),
-                  onDismissed: (direction) {
+                  onDismissed: (direction) async {
                     /*The magic
                     delete Todo item by ID whenever
                     the card is dismissed
                     */
                     todoBloc.deleteTodoById(todo.id);
+                    await TodoApiProvider.deleteApiTodoById(todo.id);
                   },
                   direction: _dismissDirection,
                   key: ObjectKey(todo),

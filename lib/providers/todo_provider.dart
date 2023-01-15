@@ -1,7 +1,11 @@
+// import 'dart:html';
+
 import '../bloc/todo_bloc.dart';
 import '../database/database.dart';
 import '../model/todo.dart';
 import 'package:dio/dio.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class TodoApiProvider {
   static Future<List<Todo?>> getAllTodos() async {
@@ -28,6 +32,11 @@ class TodoApiProvider {
 
       db!.insert("Todo", todo.toDatabaseJson());
     }).toList();
+  }
+
+  static Future deleteApiTodoById(int id) async {
+    var url = "https://63bc1a0cfa38d30d85bbadb2.mockapi.io/Todos/";
+    Response response = await Dio().delete("$url$id");
   }
 
   static Future<int?> deleteAllTodos() async {
